@@ -1,0 +1,19 @@
+    const isEmailAlreadyExist = await prisma.user.findUnique({
+      where: {
+        email,
+      },
+    })
+  
+    if (isEmailAlreadyExist) {
+      throw new Error('Email already exist')
+    }
+  
+    const password_hash = await hash(password, 6)
+  
+    const user = await prisma.user.create({
+      data: {
+        name,
+        email,
+        password: password_hash,
+      },
+    })
