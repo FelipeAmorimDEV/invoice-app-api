@@ -5,7 +5,7 @@ import { ResouceNotFoundError } from "./errors/resource-not-found-error";
 
 interface CreateInvoiceUseCaseParams {
   description: string
-  dueAt: string 
+  dueAt: string
   status: string
   terms: string
   clientName: string
