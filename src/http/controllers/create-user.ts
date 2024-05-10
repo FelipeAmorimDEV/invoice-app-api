@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 import { hash } from 'bcryptjs'
-import { prisma } from '../../prisma'
+import { prisma } from '@/prisma'
 
 export async function createUser(request: FastifyRequest, reply: FastifyReply) {
   const requestBodySchema = z.object({

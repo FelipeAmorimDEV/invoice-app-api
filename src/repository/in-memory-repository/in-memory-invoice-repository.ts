@@ -1,5 +1,5 @@
 import { Invoice, Prisma } from "@prisma/client";
-import { InvoiceRepository } from "../invoice-repository";
+import { InvoiceRepository } from "@/repository/invoice-repository";
 
 export class InMemoryInvoiceRepository implements InvoiceRepository {
   public invoices: Invoice[] = []

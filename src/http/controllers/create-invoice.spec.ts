@@ -1,7 +1,7 @@
 import { describe, it, beforeEach, expect, afterEach } from 'vitest'
 import request from 'supertest'
-import { app } from '../../app'
-import { prisma } from '../../prisma'
+import { app } from '@/app'
+import { prisma } from '@/prisma'
 
 
 

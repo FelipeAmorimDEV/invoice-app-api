@@ -1,8 +1,8 @@
 import { describe, it, beforeEach, expect } from 'vitest'
 
 import { CreateInvoiceUseCase } from './create-invoice-usecase'
-import { InMemoryInvoiceRepository } from '../repository/in-memory-repository/in-memory-invoice-repository'
-import { InMemoryUserRepository } from '../repository/in-memory-repository/in-memory-user-repository'
+import { InMemoryInvoiceRepository } from '@/repository/in-memory-repository/in-memory-invoice-repository'
+import { InMemoryUserRepository } from '@/repository/in-memory-repository/in-memory-user-repository'
 import { ResouceNotFoundError } from './errors/resource-not-found-error'
 
 let invoiceRepository: InMemoryInvoiceRepository
@@ -25,8 +25,7 @@ describe('Create Invoice Use Case', async () => {
     })
 
     const { invoice } = await sut.execute({
-      createdAt: new Date('2021-08-18'),
-      dueAt: new Date('2021-08-19'),
+      dueAt: '2021-08-19',
       description: "Re-branding",
       terms: "1",
       clientName: "Jensen Huang",
@@ -65,8 +64,7 @@ describe('Create Invoice Use Case', async () => {
   it('should not be able to create a new invoice without being authenticated', async () => {
     await expect(() =>
       sut.execute({
-        createdAt: new Date('2021-08-18'),
-        dueAt: new Date('2021-08-19'),
+        dueAt: '2021-08-19',
         description: "Re-branding",
         terms: "1",
         clientName: "Jensen Huang",

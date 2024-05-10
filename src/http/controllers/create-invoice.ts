@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
-import { makeCreateInvoiceUseCase } from '../../usecases/factories/make-create-invoice-user-case'
+import { makeCreateInvoiceUseCase } from '@/usecases/factories/make-create-invoice-user-case'
 
 export async function createInvoice(request: FastifyRequest, reply: FastifyReply) {
   const itemsSchema = z.object({

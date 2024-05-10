@@ -1,5 +1,5 @@
-import { PrismaInvoiceRepository } from "../../repository/prisma/prisma-invoice-repository";
-import { PrismaUserRepository } from "../../repository/prisma/prisma-user-repository";
+import { PrismaInvoiceRepository } from "@/repository/prisma/prisma-invoice-repository";
+import { PrismaUserRepository } from "@/repository/prisma/prisma-user-repository";
 import { CreateInvoiceUseCase } from "../create-invoice-usecase";
 
 export function makeCreateInvoiceUseCase() {

@@ -1,7 +1,7 @@
 import { describe, it, beforeEach, expect} from 'vitest'
-import { UserRepository } from '../repository/user-repository'
+import { UserRepository } from '@/repository/user-repository'
 import { CreateUserUseCase } from './create-user-usecase'
-import { InMemoryUserRepository } from '../repository/in-memory-repository/in-memory-user-repository'
+import { InMemoryUserRepository } from '@/repository/in-memory-repository/in-memory-user-repository'
 import { compare } from 'bcryptjs'
 import { EmailAlreadyExists } from './errors/email-already-exists'
 

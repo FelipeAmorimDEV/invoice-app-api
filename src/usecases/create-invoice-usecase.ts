@@ -1,8 +1,9 @@
 import { Invoice } from "@prisma/client";
-import { InvoiceRepository } from "../repository/invoice-repository";
-import { UserRepository } from "../repository/user-repository";
+import { InvoiceRepository } from "@/repository/invoice-repository";
+import { UserRepository } from "@/repository/user-repository";
 import { ResouceNotFoundError } from "./errors/resource-not-found-error";
 
+//Mudar term para número
 interface CreateInvoiceUseCaseParams {
   description: string
   dueAt: string
