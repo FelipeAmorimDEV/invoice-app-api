@@ -14,10 +14,29 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(uuid())
+  id       String    @id @default(uuid())
   name     String
-  email    String @unique
+  email    String    @unique
   password String
+  invoices Invoice[]
 
   @@map("users")
+}
+
+model Invoice {
+  id            Int      @id @default(autoincrement())
+  description   String
+  createdAt     DateTime @default(now())
+  dueAt         DateTime
+  status        String
+  terms         String
+  clientName    String
+  clientEmail   String
+  senderAddress Json
+  clientAddress Json
+  items         Json
+  total         Float
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
 }
