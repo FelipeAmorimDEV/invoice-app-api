@@ -9,7 +9,7 @@ interface DeleteInvoiceUseCaseParams {
 }
 
 interface DeleteInvoiceUseCaseResponse {
-  invoice: Invoice[]
+  invoice: Invoice
 }
 
 export class DeleteInvoiceUseCase {
