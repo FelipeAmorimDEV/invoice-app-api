@@ -4,7 +4,7 @@ import { CreateInvoiceUseCase } from './create-invoice-usecase'
 import { InMemoryInvoiceRepository } from '@/repository/in-memory-repository/in-memory-invoice-repository'
 import { InMemoryUserRepository } from '@/repository/in-memory-repository/in-memory-user-repository'
 import { ResouceNotFoundError } from './errors/resource-not-found-error'
-import { DeleteInvoiceUseCase } from './delete-invoice-usercase'
+import { DeleteInvoiceUseCase } from './delete-invoice-usecase'
 
 let invoiceRepository: InMemoryInvoiceRepository
 let sut: DeleteInvoiceUseCase
@@ -50,9 +50,9 @@ describe('Delete Invoice Use Case', async () => {
 
     const { invoice } = await sut.execute({ id: 1 })
 
-    expect(invoice).toEqual([expect.objectContaining({
+    expect(invoice).toEqual(expect.objectContaining({
       id: 1
-    })])
+    }))
   })
 
   it('should not be able to delete a inexistent invoice', async () => {
