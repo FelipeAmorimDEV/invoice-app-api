@@ -2,8 +2,23 @@ import { Invoice, Prisma } from "@prisma/client";
 import { InvoiceRepository } from "@/repository/invoice-repository";
 
 export class InMemoryInvoiceRepository implements InvoiceRepository {
-
   public invoices: Invoice[] = []
+
+  async getById(id: number) {
+    const invoice = this.invoices.find(invoice => invoice.id === id)
+
+    if (!invoice) {
+      return null
+    }
+
+    return invoice
+  }
+
+  async fetchManyById(id: string) {
+    const invoices = this.invoices.filter(invoice => invoice.userId === id)
+
+    return invoices
+  }
 
   async editInvoice(id: number, {clientAddress, clientEmail,clientName,description,dueAt,items,senderAddress,status,terms,total}: Prisma.InvoiceUncheckedCreateInput) {
     const invoice = this.invoices.find(invoice => invoice.id === id)
@@ -31,14 +46,15 @@ export class InMemoryInvoiceRepository implements InvoiceRepository {
 
   async deleteInvoice(id: number) {
     const invoiceIndex = this.invoices.findIndex(invoice => invoice.id === id)
+    const invoice = this.invoices[invoiceIndex]
 
     if(invoiceIndex < 0) {
       return null
     }
 
-    const withoutItem = this.invoices.splice(invoiceIndex, 1)
+   this.invoices.splice(invoiceIndex, 1)
     
-    return withoutItem
+    return invoice
   }
 
   async createInvoice(data: Prisma.InvoiceUncheckedCreateInput) {
