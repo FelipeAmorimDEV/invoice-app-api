@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 import { ResouceNotFoundError } from '@/usecases/errors/resource-not-found-error'
-import { makeMarkInvoiceAsPaidUseCase } from '@/usecases/factories/make-make-invoice-as-paid-usecase'
+import { makeMarkInvoiceAsPaidUseCase } from '@/usecases/factories/make-mark-invoice-as-paid-usecase'
 
 export async function markStatusAsPaid(request: FastifyRequest, reply: FastifyReply) {
   const requestBodySchema = z.object({
