@@ -29,7 +29,7 @@ model Invoice {
   createdAt     DateTime @default(now())
   dueAt         DateTime
   status        String
-  terms         String
+  terms         Int
   clientName    String
   clientEmail   String
   senderAddress Json
