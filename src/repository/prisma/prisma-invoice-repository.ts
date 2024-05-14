@@ -50,7 +50,7 @@ export class PrismaInvoiceRepository implements InvoiceRepository {
     return resource
   }
   
-  async editInvoice(id: number, data: Prisma.InvoiceUncheckedCreateInput) {
+  async editInvoice(id: number, data: Prisma.InvoiceUpdateWithoutUserInput) {
     const invoice = await prisma.invoice.update({
       where: {
         id
