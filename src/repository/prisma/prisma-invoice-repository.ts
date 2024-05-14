@@ -4,29 +4,54 @@ import { prisma } from "@/prisma";
 
 export class PrismaInvoiceRepository implements InvoiceRepository {
   async deleteInvoice(id: number) {
-    const invoice = await prisma.invoice.delete({
+    const resource = await prisma.invoice.findUnique({
       where: {
         id
       }
     })
 
-    return invoice
-  }
+    if (!resource) {
+      return null
+    }
 
-  async markInvoiceAsPaid(id: number) {
-    const invoice = prisma.invoice.update({
+    await prisma.invoice.delete({
       where: {
-        id,
-      },
-      data: {
-        status: 'paid'
+        id
       }
     })
 
-    return invoice
+    return resource
   }
+
+  async markInvoiceAsPaid(id: number) {
+    const resource = await prisma.invoice.findUnique({
+      where: {
+        id
+      }
+    })
+
+    if (!resource) {
+      return null
+    }
+
+    const hasResourceAlreadyBeenPaid = resource.status === 'paid'
+
+    if (!hasResourceAlreadyBeenPaid){
+      await prisma.invoice.update({
+        where: {
+          id,
+        },
+        data: {
+          status: 'paid'
+        }
+      })
+    }
+
+    return resource
+  }
+  
   async editInvoice(id: number, data: Prisma.InvoiceUncheckedCreateInput) {
-    const invoice = prisma.invoice.update({
+    const invoice = await prisma.invoice.update({
       where: {
         id
       },
@@ -35,8 +60,9 @@ export class PrismaInvoiceRepository implements InvoiceRepository {
 
     return invoice
   }
+
   async fetchManyById(id: string) {
-    const invoices = prisma.invoice.findMany(({
+    const invoices = await prisma.invoice.findMany(({
       where: {
         userId: id
       }
@@ -44,8 +70,9 @@ export class PrismaInvoiceRepository implements InvoiceRepository {
 
     return invoices
   }
+
   async getById(id: number) {
-    const invoice = prisma.invoice.findUnique({
+    const invoice = await prisma.invoice.findUnique({
       where: {
         id
       }
@@ -53,6 +80,7 @@ export class PrismaInvoiceRepository implements InvoiceRepository {
 
     return invoice
   }
+
   async createInvoice(data: Prisma.InvoiceUncheckedCreateInput) {
     const invoice = await prisma.invoice.create({
       data
@@ -60,5 +88,4 @@ export class PrismaInvoiceRepository implements InvoiceRepository {
 
     return invoice
   }
-
 }
