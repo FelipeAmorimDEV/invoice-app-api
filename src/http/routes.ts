@@ -6,6 +6,7 @@ import { fetchInvoices } from './controllers/invoices/fetch-invoices'
 import { getInvoice } from './controllers/invoices/get-invoice'
 import { deleteInvoice } from './controllers/invoices/delete-invoice'
 import { markStatusAsPaid } from './controllers/invoices/paid-status'
+import { editInvoice } from './controllers/invoices/edit-invoice'
 
 export async function userRoutes(app: FastifyInstance) {
   app.post('/users', createUser)
@@ -16,4 +17,5 @@ export async function userRoutes(app: FastifyInstance) {
   app.get('/invoices', fetchInvoices)
   app.delete('/invoices/:id', deleteInvoice)
   app.patch('/invoices/:id', markStatusAsPaid)
+  app.put('/invoices/:id', editInvoice)
 }
