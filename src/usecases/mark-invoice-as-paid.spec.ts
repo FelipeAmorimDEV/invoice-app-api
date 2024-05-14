@@ -2,7 +2,7 @@ import { describe, it, beforeEach, expect } from 'vitest'
 
 import { InMemoryInvoiceRepository } from '@/repository/in-memory-repository/in-memory-invoice-repository'
 import { ResouceNotFoundError } from './errors/resource-not-found-error'
-import { MarkInvoiceAsPaidUseCase } from './make-invoice-as-paid'
+import { MarkInvoiceAsPaidUseCase } from './mark-invoice-as-paid-usecase'
 
 let invoiceRepository: InMemoryInvoiceRepository
 let sut: MarkInvoiceAsPaidUseCase
