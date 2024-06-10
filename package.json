@@ -6,13 +6,20 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "lint": "eslint src --ext src .ts",
+    "test:create-prisma-environment": "npm link ./prisma/vitest-environment-prisma",
+    "test:install-prisma-environment": "npm link vitest-environment-prisma",
     "test": "vitest run --dir src/usecases",
-    "test:watch": "vitest"
+    "test:watch": "vitest --dir src/usecases",
+    "test:e2e": "vitest run --dir src/http",
+    "test:e2e:watch": "vitest --dir src/http",
+    "pretest:e2e": "run-s test:create-prisma-environment test:install-prisma-environment",
+    "test:coverage": "vitest --coverage"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fastify/cors": "9.0.1",
     "@prisma/client": "5.13.0",
     "bcryptjs": "2.4.3",
     "date-fns": "3.6.0",
@@ -26,7 +33,9 @@
     "@types/bcryptjs": "2.4.6",
     "@types/node": "20.12.7",
     "@types/supertest": "6.0.2",
+    "@vitest/coverage-v8": "1.6.0",
     "eslint": "8.57.0",
+    "npm-run-all": "4.1.5",
     "supertest": "7.0.0",
     "tsx": "4.7.2",
     "typescript": "5.4.5",

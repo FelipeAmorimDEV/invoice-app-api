@@ -51,20 +51,37 @@ export class PrismaInvoiceRepository implements InvoiceRepository {
   }
   
   async editInvoice(id: number, data: Prisma.InvoiceUpdateWithoutUserInput) {
-    const invoice = await prisma.invoice.update({
+    let total;
+    const invoiceToEdit = await prisma.invoice.findUniqueOrThrow({
+      where:{
+        id
+      }
+    })
+    
+    if (invoiceToEdit) {
+      total = data.total ?? invoiceToEdit.total  
+    } 
+
+    const invoiceEdited = await prisma.invoice.update({
       where: {
         id
       },
-      data
+      data:{
+        ...data,
+        total
+      }
     })
 
-    return invoice
+    return invoiceEdited
   }
 
   async fetchManyById(id: string) {
     const invoices = await prisma.invoice.findMany(({
       where: {
         userId: id
+      },
+      orderBy: {
+        createdAt: "desc"
       }
     }))
 

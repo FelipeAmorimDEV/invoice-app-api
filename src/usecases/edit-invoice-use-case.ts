@@ -38,10 +38,10 @@ export class EditInvoiceUseCase {
   constructor(private invoiceRepository: InvoiceRepository) { }
 
   async execute({ description, clientName, clientEmail, clientAddress, senderAddress,terms, items, id, createdAt}: EditInvoiceUseCaseParams): Promise<EditInvoiceUseCaseResponse> {
-
+   
     const dueAt = addDays(new Date(createdAt), terms)
-    const total = items ? items.reduce((acc,item) => acc+= item.total, 0) : 0
-
+    const total = items?.reduce((acc,item) => acc+= item.total, 0)
+   
     const date = { description, clientName, clientEmail, clientAddress, senderAddress, terms, dueAt, items, total }
 
     const invoice = await this.invoiceRepository.editInvoice(id, date)

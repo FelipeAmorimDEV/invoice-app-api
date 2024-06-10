@@ -13,6 +13,7 @@ export async function editInvoice(request: FastifyRequest, reply: FastifyReply) 
   }).optional()
 
   const itemsSchema = z.object({
+    id: z.string().uuid(),
     name: z.string(),
     quantity: z.number(),
     price: z.number(),

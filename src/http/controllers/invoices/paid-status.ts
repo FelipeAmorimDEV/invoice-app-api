@@ -12,9 +12,9 @@ export async function markStatusAsPaid(request: FastifyRequest, reply: FastifyRe
 
   try {
     const markInvoiceAsPaid = makeMarkInvoiceAsPaidUseCase()
-    await markInvoiceAsPaid.execute({ id: Number(id) })
+    const { invoice } = await markInvoiceAsPaid.execute({ id: Number(id) })
 
-    return reply.status(204).send()
+    return reply.status(200).send({ invoice })
   } catch (error) {
     if (error instanceof ResouceNotFoundError) {
       return reply.status(404).send({ message: error.message })

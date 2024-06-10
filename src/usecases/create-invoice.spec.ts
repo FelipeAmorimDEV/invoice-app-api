@@ -25,9 +25,8 @@ describe('Create Invoice Use Case', async () => {
     })
 
     const { invoice } = await sut.execute({
-      dueAt: '2021-08-19',
       description: "Re-branding",
-      terms: "1",
+      terms: 1,
       clientName: "Jensen Huang",
       clientEmail: "jensenh@mail.com",
       status: "paid",
@@ -51,7 +50,6 @@ describe('Create Invoice Use Case', async () => {
           total: 1800.90
         }
       ],
-      total: 1800.90,
       userId: 'user-1'
     })
 

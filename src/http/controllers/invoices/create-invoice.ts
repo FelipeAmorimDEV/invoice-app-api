@@ -12,6 +12,7 @@ export async function createInvoice(request: FastifyRequest, reply: FastifyReply
   })
 
   const itemsSchema = z.object({
+    id: z.string().uuid(),
     name: z.string(),
     quantity: z.number(),
     price: z.number(),
@@ -35,9 +36,9 @@ export async function createInvoice(request: FastifyRequest, reply: FastifyReply
 
   try {
     const createInvoiceUseCase = makeCreateInvoiceUseCase()
-    await createInvoiceUseCase.execute({ description, clientName, clientEmail, clientAddress, senderAddress, status, terms, items, userId })
+    const { invoice } = await createInvoiceUseCase.execute({ description, clientName, clientEmail, clientAddress, senderAddress, status, terms, items, userId })
 
-    return reply.status(201).send()
+    return reply.status(201).send({ invoice })
   } catch (error) {
     if (error instanceof ResouceNotFoundError) {
       return reply.status(403).send({ message: error.message })
